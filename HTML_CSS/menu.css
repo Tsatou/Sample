@@ -1,0 +1,160 @@
+@charset "UTF-8";
+h1{
+	font-size:18px;
+	margin:0;
+	padding:0;
+}
+p{
+	margin:0;
+	padding:0;
+}
+.menu{
+	margin-bottom:5px;
+	clear:both;
+}
+#menu1{
+	background:#33CCFF;
+	overflow: hidden;
+	width:490px;
+}
+#menu1 li{
+	margin:0 auto;
+	text-align: center;
+	display:block;
+	color:white;
+	width:150px;
+	float:left;
+	font-size:12px;
+}
+#menu1 span{
+	font-size:18px;
+}
+#menu1 li:hover{
+	color:#FF6666;
+}
+#menu2{
+	overflow: hidden;
+	padding:0;
+}
+#menu2 li{
+	text-align:center;
+	display: block;
+	width:100px;
+	float:left;
+	color:white;
+	margin-left:2px;
+	border-radius:4px;	
+}
+#menu2 li:nth-child(1){
+	background:green;
+	border:1px solid green;
+}
+#menu2 li:nth-child(2){
+	background:pink;
+	border:1px solid pink;
+}
+#menu2 li:nth-child(3){
+	background:blue;
+	border:1px solid blue;
+}
+#menu3{
+	padding:0;
+	border:1px solid orange;
+	border-radius:8px;
+	width:200px;
+}
+#menu3 li{
+	padding-left:10px;
+	display:block;
+	text-decoration:underline;
+	border-bottom:1px inset gray;
+	margin-bottom:10px;
+	position:relative;
+}
+#menu3 li:after{
+	content:"";
+	position:absolute;
+	border:10px solid orange;
+	border-right:10px solid white;
+	border-top:10px solid white;
+	border-bottom:10px solid white;
+	left:180px;
+	top:1px;
+}
+#menu3 li:nth-child(1){
+	border-bottom:none;
+	color:white;
+	background:orange;
+	text-decoration:none;
+}
+#menu3 li:nth-child(1):after{
+	border:none;
+}
+#menu3 li:nth-child(4){
+	margin-bottom:20px;
+}
+#menu3 li span{
+	font-size:10px;
+	padding-left:50px;
+}
+#menu4{
+	margin:0;
+	padding:0;
+}
+#menu4 li{
+	float:left;
+	display:block;
+	width:100px;
+	height:30px;
+	line-height:35px;
+	padding:5px;
+	text-align: center;
+	position:relative;
+	overflow: hidden;
+}
+#menu4 li span{
+	position:absolute;
+	left:4px;
+	top:0px;
+	border: 6px solid black;
+	width:calc(100% - 20px);
+	height:calc(100% - 12px);
+	-webkit-perspective:1000px;
+	-webkit-transform: scale(1.3);	
+	transition: all .4s cubic-bezier(.77,0,.175,1);
+}
+#menu4 li:hover span{	
+	-webkit-transform: scale(1);
+}
+#menu5{
+	width:222px;
+	background: #333333;
+	overflow:auto;
+	height:80px;
+	margin:0;
+	padding:0;
+	text-align: center;
+}
+#menu5 li{
+	background: #333333;
+	display: block;
+	color:green;
+	border-collapse: separate;
+	float:left;
+	width:60px;
+	height:60px;
+	line-height:60px;
+	border:2px solid white;
+	color:white;
+	border-radius:30px;
+	margin:10px 5px 10px 5px;
+	opacity:0.5;
+}
+#menu5 li:hover{
+	opacity:1;
+}
+
+
+
+
+
