@@ -153,8 +153,151 @@ p{
 #menu5 li:hover{
 	opacity:1;
 }
-
-
+#menu6{
+	margin:0;
+	padding:0;
+}
+#menu6 li{
+	text-align: center;
+	display:block;
+	width:100px;
+	margin-right:10px;
+	padding-bottom:10px;
+	border-bottom:2px solid #00B090;
+	float:left;
+}
+#menu6 li:hover{
+	color:gray;
+	border-color:red;
+	transition:all 1s cubic-bezier(0,0,0,0.5) 0s;
+}
+#menu7{
+	margin:0;
+	padding:0;
+	overflow:auto;
+	border-bottom:1px solid gray;
+	width:555px;
+	padding-bottom:2px;
+}
+#menu7 li{
+	display:block;
+	float:left;
+	width:100px;
+	padding:5px 5px 10px 5px;
+	border-right:1px solid gray;
+	text-align: center;
+}
+#menu7 li:nth-child(1):hover{
+	background:#FF99CC;
+}
+#menu7 li:nth-child(2):hover{
+	background:#CC99CC;
+}
+#menu7 li:nth-child(3):hover{
+	background:#6666FF;
+}
+#menu7 li:nth-child(4):hover{
+	background:#996600;
+}
+#menu7 li:nth-child(5):hover{
+	background:#00FF00;
+}
+#menu8{
+	width:500px;
+	overflow:hidden;
+}
+#menu8 li{
+	text-align:center;
+	float:left;
+	width:150px;
+	display:  block;
+}
+#menu8 li span{
+	font-size:10px;
+}
+#menu9{
+	margin:0;
+	padding:0;
+}
+#menu9 li{
+	text-align:center;
+	display:block;
+	float:left;
+	width:40px;
+	height:35px;
+	padding:5px;
+	line-height:35px;
+	border:2px ridge palegreen;
+	border-radius:30px;
+	position:relative;
+}
+#menu9_1{
+	background:black;
+	position: absolute;
+	color:white;
+	width:100px;
+	height:28px;
+	top:-40px;
+	left:0;
+	display:none;
+}
+#menu9_1:before{
+	content:"";
+	border:8px solid black;
+	border-left:8px solid white;
+	border-right:8px solid white;
+	border-bottom:1px solid white;
+	position:absolute;
+	top:28px;
+	left:20px;
+}
+#menu9_2{
+	background:black;
+	position: absolute;
+	color:white;
+	width:100px;
+	height:28px;
+	top:-40px;
+	left:-10px;
+	display:none;
+}
+#menu9_2:before{
+	content:"";
+	border:8px solid black;
+	border-left:8px solid white;
+	border-right:8px solid white;
+	border-bottom:1px solid white;
+	position:absolute;
+	top:28px;
+	left:20px;
+}
+#menu9_3{
+	background:black;
+	position: absolute;
+	color:white;
+	width:100px;
+	height:28px;
+	top:-40px;
+	left:-10px;
+	display: none;
+}
+#menu9_3:before{
+	content:"";
+	border:8px solid black;
+	border-left:8px solid white;
+	border-right:8px solid white;
+	border-bottom:1px solid white;
+	position:absolute;
+	top:28px;
+	left:20px;
+}
+#menu9 li:hover{
+	background:palegreen;
+	color:white;
+}
+#menu9 li:hover span{
+	display:block;
+}
 
 
 
