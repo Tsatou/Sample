@@ -298,6 +298,85 @@ p{
 #menu9 li:hover span{
 	display:block;
 }
+#menu10{
+	background:purple;
+	overflow:auto;
+	width:300px;
+	height:40px;
+	margin:0;
+	padding:0;
+	position: relative;
+	color:white;
+	left:-200px;
+}
+#menu10 li{
+	display:block;
+	float:left;
+	width:50px;
+	padding:0;
+}
+#menu10 li:nth-child(1){
+	float:right;
+}
+#menu10:hover{
+	left:-20px;
+	transition:all 1s ease-in 0s;
+}
+#menu10 li:hover{
+	color:green;
+}
+#menu11{
+	height:40px;
+}
+#menu11_btn{
+	position:relative;
+	width:50px;
+	height:30px;
+}
+#menu11_btn span{
+	position:absolute;
+	width:1px;
+    height:2px;
+	border-left:40px solid blue;
+}
+#menu11_btn span:before{
+	content:"";
+	position:absolute;
+	width:1px;
+    height:2px;
+    top:10px;
+    left:-40px;
+	border-left:40px solid blue;
+}
+#menu11_btn span:after{
+	content:"";
+	position:absolute;
+	width:1px;
+    height:2px;
+    top:20px;
+    left:-40px;
+	border-left:40px solid blue;
+}
+#menu11_li{
+	top:-200px;
+	width:200px;
+	height:150px;
+	background:black;
+	opacity:0;
+	position:relative;
+	display:none;
+}
+#menu11_li p{
+	margin:0;
+	padding:0;
+	position:absolute;
+	color:white;
+	font-size:20px;
+}
+#menu11_li li{
+	display:block;
+	color:white;
+}
 
 
 
