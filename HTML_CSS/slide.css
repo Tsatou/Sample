@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.slide{
+	margin-bottom:5px;
+	clear:both;
+}
+p{
+	margin:0;
+	padding:0;
+}
+#slide1{
+	width:90px;
+	overflow: hidden;
+}
+#slide1_text{
+	position:relative;
+	left:0;
+}
+#slide1_text p{
+	float:left;
+	width:30px;
+	position:relative;
+	background:gray;
+	color:white;
+	border-radius:20px;
+	text-align: center;
+}
+#select{
+	clear:both;
+}
