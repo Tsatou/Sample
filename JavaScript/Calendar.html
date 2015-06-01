@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="oauth.js" type="text/javascript"></script>
+    <script src="sha1.js" type="text/javascript"></script>
+
+    <title></title>
+<style>
+#header {
+    width:900px;
+    margin:0 auto;
+    overflow:auto;
+}
+
+h1 {
+    font-weight:400;
+    margin:0;
+    padding:0;
+    color:gray;
+    float:left;
+    font-family:Osaka,Arial,Helvetica,sans-serif;
+    position:relative;
+    left:26px;
+}
+
+h1 span {
+    font-size:45px;
+    padding:0;
+    margin:0;
+    text-shadow:2px 4px 2px gray;
+}
+
+#header ul {
+    overflow:hidden;
+    padding-left:25px;
+    position:absolute;
+    top:22px;
+    left:450px;
+}
+
+#header li {
+    display:block;
+    float:left;
+    margin-left:6px;
+    color:gray;
+}
+
+#input {
+    width:100px;
+}
+
+button {
+    background:none;
+    border:2px solid #90ee90;
+    border-radius:10px;
+    color:gray;
+}
+
+#slideContent {
+    width:200px;
+    margin:0 auto;
+    height:40px;
+    position:relative;
+}
+#slideYear{
+    margin:0 auto;
+    padding:0;
+    text-align: center;
+}
+#slide {
+    width:90px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+#slideMonth {
+    position:relative;
+    left:0;
+    top:-13px;
+}
+
+#slideMonth p {
+    float:left;
+    width:30px;
+    position:relative;
+    color:gray;
+    text-align:center;
+}
+
+#slideMonthBack {
+    content:"";
+    border:10px solid gray;
+    border-left:10px solid #fff;
+    border-bottom:10px solid #fff;
+    border-top:10px solid #fff;
+    position:absolute;
+    top:28px;
+    left:21px;
+}
+
+#slideMonthGo {
+    content:"";
+    border:10px solid gray;
+    border-right:10px solid #fff;
+    border-bottom:10px solid #fff;
+    border-top:10px solid #fff;
+    position:absolute;
+    top:28px;
+    left:149px;
+}
+
+#mainContent {
+    width:1000px;
+    margin:0 auto;
+    position:relative;
+}
+
+#table1 {
+    width:1000px;
+    height:550px;
+    margin:0 auto;
+    font-size:14px;
+    position:absolute;
+    z-index:2;
+    top:10px;
+}
+
+#table2 {
+    z-index:1;
+    width:1000px;
+    height:550px;
+    margin:0 auto;
+    font-size:14px;
+    position:absolute;
+    top:10px;
+}
+
+.day {
+    display:inline-block;
+    width:44px;
+    height:44px;
+    background:#90ee90;
+    margin:0 4px 3px 0;
+    border:3px solid #90ee90;
+    border-radius:22px;
+    text-align:center;
+    color:#fff;
+    font-size:20px;
+    line-height:20px;
+    padding:5px 1px 0;
+    position:relative;
+    left:45px;
+    cursor: pointer;
+}
+
+.liveCount {
+    font-size:11px;
+    padding:0;
+}
+
+.listContent {
+    position:absolute;
+    width:450px;
+    height:410px;
+    top:3px;
+    left:475px;
+    background:#fff;
+    border:3px solid #90ee90;
+    border-radius:10px;
+    box-shadow:4px 2px #90ee90;
+    overflow:scroll;
+}
+
+.listContent p {
+    color:gray;
+    padding:0;
+    padding-left:7px;
+    border-bottom:1px dotted gray;
+}
+
+.liveList {
+    overflow:scroll;
+    height:90%;
+}
+.liveList p{
+    cursor: pointer;
+}
+.listContent .listTitle {
+    font-size:18px;
+    margin:3px 0;
+}
+
+span {
+    padding-left:10px;
+}
+
+#calendar1 {
+    float:left;
+    width:500px;
+    padding-left:25px;
+}
+#calendar2 {
+    float:left;
+    width:500px;
+    padding-left:25px;
+}
+
+.week {
+    display:inline-block;
+    width:44px;
+    height:20px;
+    background:#90ee90;
+    margin:0 4px 4px 0;
+    border:3px solid #90ee90;
+    border-radius:22px;
+    text-align:center;
+    color:#fff;
+    font-size:17px;
+    line-height:20px;
+    padding:1px;
+    position:relative;
+    left:45px;
+}
+
+.liveContent {
+    display:none;
+    width:600px;
+    height:450px;
+    border:3px solid #90ee90;
+    box-shadow:2px 3px #90ee90;
+    position:absolute;
+    background:#fff;
+    top:0;
+    left:-120px;
+    color:gray;
+}
+
+.liveContent h3 {
+    font-size:27px;
+    text-align:center;
+    font-weight:400;
+    padding:0;
+    margin:5px 0 3px;
+}
+
+.liveContentMenu {
+    width:550px;
+    margin:0 auto;
+}
+
+.liveText {
+    width:550px;
+    margin:0 auto;
+    height:80%;
+    overflow:scroll;
+}
+.liveText span{
+    padding-left:0;
+}
+
+.twitterText  {
+    color:gray;
+    padding-bottom:2px;
+    padding-left:5px;
+    border-bottom:1px dotted gray;
+}
+
+.liveDiv {
+    margin:10px 0;
+}
+.liveDiv p {
+    margin:0;
+    margin-left:40px
+}
+
+.liveDiv img {
+    width:40px;
+    height:40px;
+    float:left;
+}
+.twitterName{
+    margin-right:8px;
+}
+.liveDivYoutube {
+    margin:10px 0;
+    border-bottom:2px dotted gray;
+}
+.youtubeName{
+    color:gray;
+    padding:0;
+    margin:3px 0;
+}
+
+.twitter {
+    cursor: pointer;
+    font-size:25px;
+    color:#55ACEE;
+    border-bottom:2px solid #55ACEE;
+    padding-bottom:2px;
+}
+
+.youtube {
+    cursor: pointer;
+    font-size:20px;
+    color:#e52d27;
+}
+#about{
+    cursor: pointer;
+}
+.aboutIcon{
+    position: absolute;
+    top:43px;
+    left:690px;
+    width:50px;
+    height:30px;
+    background-image: url("0028_8.png");
+    background-repeat: no-repeat;
+    transform:rotate(30deg);
+}
+.aboutIcon:after{
+    content:"キーワードを入れて予定を検索することもできます";
+    position: absolute;
+    top:-70px;
+    left:20px;
+    width:200px;
+    transform:rotate(-30deg);
+}
+
+.aboutIcon2{
+    position:absolute;
+    z-index:3;
+    top:215px;
+    left:640px;
+    width:50px;
+    height:30px;
+    background-image: url("0028_8.png");
+    background-repeat: no-repeat;
+    transform:rotate(120deg);
+}
+.aboutIcon2:after{
+    content:"日付を押すとその日にあるライブの予定が表示され予定を押すと関係のあるTwitterなどが表示されます";
+    position:absolute;
+    top:-190px;
+    left:-230px;
+    width:380px;
+    transform:rotate(-120deg);    
+}
+
+.nextPage{
+    margin:15px 0 10px 0;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+    <div id="header">
+        <h1><span>L</span>ive calendar</h1>
+
+        <ul>
+            <li id="about">About</li>
+
+            <li><input id="input" type="text"><button>検索</button></li>
+        </ul>
+
+    <span id="Icon"></span>
+    <span id="Icon2"></span>
+    </div>
+
+    <div id="slideContent">
+        <p id="slideYear"></p>
+
+        <div id="slide">
+            <div id="slideMonth">
+                <p></p>
+
+                <p></p>
+
+                <p></p>
+            </div>
+
+            <p><span id="slideMonthBack"></span><span id=
+            "slideMonthGo"></span></p>
+        </div>
+    </div>
+
+    <div id="mainContent">
+        <div id="table1">
+            <table id="calendar1" class="calendars"></table>
+
+            <div class="listContent">
+                <p class="listTitle">4月1日</p>
+
+                <div class="liveList">
+                </div>
+
+            </div>
+
+            <div class="liveContent">
+                <div class="liveContentMenu">
+                    <span class="twitter">Twitter</span><span class=
+                    "youtube">YouTube</span>
+                </div>
+
+                <div class="liveText"></div>
+            </div>
+        </div>
+
+        <div id="table2">
+            <table id="calendar2" class="calendars"></table>
+
+            <div class="listContent">
+                <p class="listTitle">5月1日</p>
+
+                <div class="liveList">
+                </div>
+            </div>
+
+            <div class="liveContent">
+                <div class="liveContentMenu">
+                    <span class="twitter">Twitter</span><span class=
+                    "youtube">YouTube</span>
+                </div>
+
+                <div class="liveText"></div>
+            </div>
+        </div>
+    </div>
+<script>
+var nowDate = new Date();
+var nowYear = nowDate.getFullYear();
+var nowMonth = nowDate.getMonth(); //月の基準に使用
+var nowMonth1 = nowDate.getMonth();
+var nowMonth2 = nowDate.getMonth() + 1;
+
+var slideNowYear = nowYear;
+
+var day = ["日", "月", "火", "水", "木", "金", "土"];
+
+var reslut = "";
+var reslut2 = "";
+
+
+showCalendar(reslut, nowYear, nowMonth1, '#calendar1');
+showCalendar(reslut2, nowYear, nowMonth2, '#calendar2');
+
+//年号を表示する
+$('#slideYear').text(slideNowYear);
+
+//先月 今月 来月を表示する
+for (var i = 0; i < 3; i++) {
+    $('#slideMonth p').eq(i).text(nowMonth + i);
+}
+//今月の文字を拡大表示
+$('#slideMonth p').eq(1).css({
+    'font-size': '26px',
+    'line-height': '2px'
+});
+
+
+//カレンダーの作成
+function showCalendar(resluts, nowYears, nowMonths, calendar) {
+    var nowFastday = new Date(nowYears, nowMonths, 1).getDay();
+    var nowLastdate = new Date(nowYears, nowMonths + 1, 0).getDate();
+    var nowLastday = new Date(nowYears, nowMonths + 1, 0).getDay();
+    resluts = "";
+
+
+
+    $(calendar).empty();
+
+    resluts += '<tr>';
+    for (var i = 0; i < day.length; i++) {
+        resluts += '<td class="week">' + day[i] + '</td>';
+    }
+
+
+    resluts += '<tr>';
+
+    for (var i = 0; i < nowFastday; i++) {
+        resluts += '<td class="day"></td>';
+    }
+
+    for (var i = 0; i < nowLastdate; i++) {
+
+        if ((i + nowFastday) % 7 === 0) {
+            resluts += '<tr>';
+        }
+
+        resluts += '<td class="day" data-id="' + (i + 1) + '">' + (i + 1) + '<br><span class="liveCount"></span></td>';
+
+    }
+
+    for (var i = 0; i < 6 - nowLastday; i++) {
+        resluts += '<td class="day"></td>';
+    }
+
+
+    //カレンダーの下の段の空白を合わせるためのtd
+
+    if (nowFastday + nowLastdate <= 28) {
+        for (var i = 0; i < 2; i++) {
+            resluts += '<tr>';
+            for (var x = 0; x < 7; x++) {
+                resluts += '<td class="day"></td>';
+            }
+        }
+    } else if (nowFastday + nowLastdate <= 35) {
+        resluts += '<tr>';
+        for (var x = 0; x < 7; x++) {
+            resluts += '<td class="day"></td>';
+        }
+
+    }
+
+    $(calendar).append(resluts);
+    $('.listTitle').html((nowMonth + 1) + '月' + 1 + '日');
+}
+
+
+
+//アニメーションするためのtableを取得
+var table1 = document.getElementById('table1');
+var table2 = document.getElementById('table2');
+
+var slideValue = 0;
+var slideFlag = true; //テーブル部分のslide判定
+var slideClickFlag = false; //月の部分のslide判定
+
+
+
+
+//カレンダーがめくれる時の動作
+function slideNextMonth(element1) {
+    slideValue += 20;
+    element1.style.transform = "rotateX(" + (slideValue / 2.8) + "deg)" + "rotateY(" + (-slideValue / 3) + "deg)";
+    element1.style.top = (-slideValue * 2) + "px";
+    element1.style.left = (-slideValue * 2) + "px";
+}
+//カレンダーが戻る時の動作
+function slideBackMonth(element1) {
+    slideValue += 20;
+    element1.style.transform = "rotateX(" + (-400 + slideValue / 4.9) + "deg)" + "rotateY(" + (-290 - slideValue / 2.57) + "deg)";
+    element1.style.top = (-350 + slideValue * 1.8) + "px";
+    element1.style.left = (-370 + slideValue * 1.85) + "px";
+}
+
+//カレンダーの移動が終わった後にカレンダーを重ねる
+function slideNextMonthReturn(element1, element2) {
+    element1.style.transform = "rotateX(" + 0 + "deg)" + "rotateY(" + 0 + "deg)";
+    element1.style.left = "0px";
+    element1.style.top = "10px";
+    element1.style.zIndex = "1";
+    element2.style.zIndex = "2";
+}
+
+
+//来月ボタンを押した時に呼び出される関数
+function startSlideNextMonth() {
+    if (slideValue < 200) {
+        if (slideFlag) {
+            var startSlideNextMonth1 = slideNextMonth(table1);
+        } else {
+            var startSlideNextMonth1 = slideNextMonth(table2);
+        }
+    } else {
+        if (slideFlag) {
+            var startSlideNextMonth1 = slideNextMonthReturn(table1, table2);
+            slideFlag = false;
+            nowMonth1 += 2;
+            showCalendar(reslut, nowYear, nowMonth1, '#calendar1');
+            showCalendarCount("#table2", nowMonth2);
+
+        } else {
+            var startSlideNextMonth1 = slideNextMonthReturn(table2, table1);
+            slideFlag = true;
+            nowMonth2 += 2;
+            showCalendar(reslut2, nowYear, nowMonth2, '#calendar2');
+            showCalendarCount("#table1", nowMonth1);
+
+        }
+        clearInterval(clearSlideNextMonth);
+        slideValue = 0;
+        slideClickFlag = false;
+    }
+}
+
+//先月ボタンを押した時に呼び出される関数
+function startSlideBackMonth() {
+
+    if (slideValue < 200) {
+        if (slideFlag) {
+            var startSlideBacktMonth = slideBackMonth(table2);
+        } else {
+            var startSlideBacktMonth = slideBackMonth(table1);
+        }
+    } else {
+        if (slideFlag) {
+            var startSlideBacktMonth = slideNextMonthReturn(table1, table2);
+            slideFlag = false;
+            nowMonth2 -= 2;
+            showCalendar(reslut2, nowYear, nowMonth2, '#calendar2');
+
+            showCalendarCount("#table2", nowMonth2);
+        } else {
+            var startSlideBacktMonth = slideNextMonthReturn(table2, table1);
+            slideFlag = true;
+            nowMonth1 -= 2;
+            showCalendar(reslut, nowYear, nowMonth1, '#calendar1');
+
+
+            showCalendarCount("#table1", nowMonth1);
+        }
+
+        clearInterval(clearSlideBackMonth);
+        slideValue = 0;
+        slideClickFlag = false;
+    }
+}
+
+
+//月部分のslide
+var slideMonthSpped = 0;
+var slideMonthFlag = true;
+
+
+function slideMenuMonthGo() {
+    slideMonthSpped -= 2;
+    $('#slideMonth').css('left', slideMonthSpped + 'px');
+    if (slideMonthSpped < -30) {
+        slideMonthFlag = true;
+        slideMonthMove(0, 1, 1);
+        clearInterval(startMove);
+    }
+}
+
+function slideMenuMonthBack() {
+    slideMonthSpped += 2;
+    $('#slideMonth').css('left', slideMonthSpped + 'px');
+    if (slideMonthSpped > 30) {
+        slideMonthFlag = false;
+        slideMonthMove(2, 0, -1);
+        clearInterval(startMove);
+    }
+}
+
+//月部分のslide機能
+function slideMonthMove(remove_p, create_p, addition_p) {
+
+    $('#slideMonth p').eq(remove_p).remove();
+    var slideMonthValue = parseInt($('#slideMonth p').eq(create_p).text());
+    if (slideMonthFlag) {
+        if (parseInt($('#slideMonth p').eq(1).text()) === 1) {
+
+            slideNowYear += 1; //1月を迎えた時に年号を＋する
+
+            scheduleYear = []; //カレンダーobjを空にする
+            showCalendarSchedule(); //新しい年のカレンダーobjを作成し直す
+            $('#slideYear').text(slideNowYear);
+        }
+
+
+
+        if (parseInt($('#slideMonth p').eq(1).text()) === 12) {
+            $('#slideMonth').append('<p>' + 1 + '</p>');
+        } else {
+            $('#slideMonth').append('<p>' + (slideMonthValue + addition_p) + '</p>');
+        }
+    } else {
+
+        if (parseInt($('#slideMonth p').eq(1).text()) === 1) {
+
+            slideNowYear -= 1; //12月を迎えた時に年号を−する
+
+            scheduleYear = []; //カレンダーobjを空にする
+            showCalendarSchedule(); //新しい年のカレンダーobjを作成し直す
+            $('#slideYear').text(slideNowYear);
+        }
+
+
+        if (parseInt($('#slideMonth p').eq(0).text()) === 1) {
+            $('#slideMonth p').eq(0).before('<p>' + 12 + '</p>');
+        } else {
+            $('#slideMonth p').eq(0).before('<p>' + (slideMonthValue + addition_p) + '</p>');
+        }
+    }
+    slideMonthSpped = 0;
+    $('#slideMonth').css('left', slideMonthSpped + 'px'); //月全体をslideさせる
+    $('#slideMonth p').css({
+        'font-size': '16px',
+        'line-height': '25px'
+    });
+
+    //今月の文字を大きくする
+    $('#slideMonth p').eq(1).css({
+        'font-size': '26px',
+        'line-height': '2px'
+    });
+}
+
+
+
+//◯月１日のliveリストを表示
+function showLiveList() {
+    $('.liveList').empty();
+    for (var a = 0; a < scheduleYear[0].month[nowMonth].day[0].live.length; a++) {
+        $('.liveList').append('<p>' + scheduleYear[0].month[nowMonth].day[0].live[a].schedule + '</p>');
+    }
+}
+
+
+
+
+//来月に進むボタンを押した時の動作
+$('#slideMonthGo').click(function() {
+        if (slideClickFlag) return;
+
+        if (nowMonth < 11) {
+            nowMonth += 1;
+        } else {
+            nowMonth = 0;
+        }
+
+        slideClickFlag = true;
+        startMove = setInterval('slideMenuMonthGo()', 50); //月部分のアニメーション
+        clearSlideNextMonth = setInterval('startSlideNextMonth()', 80); //カレンダー部分のアニメーション
+        showLiveList(); //◯月１日のliveリストを表示
+
+    })
+    //先月に進むボタンを押した時の動作
+$('#slideMonthBack').click(function() {
+    if (slideClickFlag) return;
+
+
+    if (nowMonth === 0) {
+        nowMonth = 11;
+    } else {
+        nowMonth -= 1;
+    }
+
+    if (slideFlag) {
+        table2.style.transform = "rotateX(" + (-400) + "deg)" + "rotateY(" + (-290) + "deg)";
+        table2.style.top = (-350) + "px";
+        table2.style.left = (-370) + "px";
+        table2.style.zIndex = "2";
+        table1.style.zIndex = "1";
+    } else {
+        table1.style.transform = "rotateX(" + (-400) + "deg)" + "rotateY(" + (-290) + "deg)";
+        table1.style.top = (-350) + "px";
+        table1.style.left = (-370) + "px";
+        table1.style.zIndex = "2";
+        table2.style.zIndex = "1";
+    }
+    slideClickFlag = true;
+    startMove = setInterval('slideMenuMonthBack()', 50); //月部分のアニメーション
+    clearSlideBackMonth = setInterval('startSlideBackMonth()', 80); //カレンダー部分のアニメーション
+    showLiveList(); //◯月１日のliveリストを表示
+})
+
+
+
+
+//Twitter API部分
+
+var nexts = "";
+var nextTwitterFlag = false;
+
+function showTwitter(action, keywords) {
+    var accessor = {
+        consumerSecret: consumerSecret,
+        tokenSecret: tokenSecret
+    };
+
+    var message = {
+        method: "GET",
+        action: action,
+        parameters: {
+            oauth_signature_method: "HMAC-SHA1",
+            oauth_consumer_key: consumerKey,
+            oauth_token: accessToken,
+            "q": keywords,
+            "count": 5,
+            "lang": "ja",
+            "result_type": "recent",
+            callback: "update"
+        }
+    };
+
+    OAuth.setTimestampAndNonce(message);
+    OAuth.SignatureMethod.sign(message, accessor);
+    var url = OAuth.addToURL(message.action, message.parameters);
+
+
+    $.ajax({
+        type: message.method,
+        url: url,
+        dataType: "jsonp",
+        jsonp: false,
+        cache: true,
+    });
+}
+
+
+function update(data) {
+    if (nextTwitterFlag) { //続きを読み込むを押した時の動作
+        $(".nextTwitter").empty();
+    } else { //Twitterボタンを押した時の動作
+        $(".liveText").empty();
+        $('.liveContent h3').remove();
+        $('.liveContentMenu').before('<h3>' + keywords + '</h3>');
+    }
+
+
+    for (var i = 0; i < data.statuses.length; i++) {
+        nexts = data.search_metadata.next_results;
+        var name = data.statuses[i].user.name;
+        var imgsrc = data.statuses[i].user.profile_image_url;
+        var content = data.statuses[i].text;
+        var update = new Date(data.statuses[i].created_at);
+
+        $(".liveText").append('<div class="liveDiv"><img src="' + imgsrc + '" />' + '<p class="twitterText">' + content + '<br><span class="twitterName">' + name + '</span>' + update.getFullYear() + '-' + (update.getMonth() + 1) + '-' + update.getDate() + '</p></div>');
+    }
+    $('.liveText').append('<div class="nextTwitter nextPage">続きを読み込む</div>');
+}
+
+
+
+
+//Youtube API部分
+
+var pageToken = "";
+var nextYoutubeFlag = false;
+var showliveDiv = [];
+
+function showYoutube(keywords) {
+    if (nextYoutubeFlag) { //続きを読み込むを押した時の動作
+        var keys = 'https://www.googleapis.com/youtube/v3/search?key=' + key + '&part=snippet&maxResults=3&q=' + keywords + '&pageToken=' + pageToken;
+
+    } else { //Youtubeボタンを押した時の動作
+        $(".liveText").empty();
+        $('.liveContent h3').remove();
+        $('.liveContentMenu').before('<h3>' + keywords + '</h3>');
+
+        var keys = 'https://www.googleapis.com/youtube/v3/search?key=' + key + '&part=snippet&maxResults=3&q=' + keywords;
+
+    }
+
+    $.getJSON(keys, function(data) {
+        if (!nextYoutubeFlag) showliveDiv = []; //Youtubeボタンを押した時はshowliveDivを一旦空にする
+        for (var i = 0; i < data.items.length; i++) {
+            pageToken = data.nextPageToken;
+            showliveDiv.push('<div class="liveDivYoutube"><iframe width="400" height="200" src="https://www.youtube.com/v/' + data.items[i].id.videoId + '?version=3"frameborder="0" allowfullscreen></iframe><p class="youtubeName">' + data.items[i].snippet.title + '</div>');
+        }
+        $('.liveText').html(showliveDiv);
+        $('.liveText').append('<div class="nextYoutube nextPage">続きを読み込む</div>');
+    });
+}
+
+
+
+//Youtubeeの続きを読み込む機能
+$(document).on('click', '.nextYoutube', function() {
+        nextYoutubeFlag = true;
+        showYoutube(keywords);
+    })
+    //Twitterの続きを読み込む機能
+$(document).on('click', '.nextTwitter', function() {
+    nextTwitterFlag = true;
+    var url = "https://api.twitter.com/1.1/search/tweets.json" + nexts;
+    showTwitter(url, keywords);
+})
+
+
+
+
+//ライブリストを押した時の動作
+$(document).on('click', '.liveList p', function() {
+
+    var url = "https://api.twitter.com/1.1/search/tweets.json";
+
+    keywords = $(this).text();
+
+    $('.liveContentMenu span').css({ //Twitter Youtubeボタンともに一度標準サイズにする
+        'font-size': '20px',
+        'border-bottom': 'none',
+        'padding-bottom': '0px'
+    });
+    $('.twitter').css({ //liveリストが押された時にTwitterボタンを押した状態にする
+        'font-size': '25px',
+        'border-bottom': '2px solid #55ACEE',
+        'padding-bottom': '2px'
+    });
+    showTwitter(url, keywords);
+
+    $(document).on('click', '.twitter', function() {
+        $('.liveContentMenu span').css({
+            'font-size': '20px',
+            'border-bottom': 'none',
+            'padding-bottom': '0px'
+        });
+        $('.twitter').css({
+            'font-size': '25px',
+            'border-bottom': '2px solid #55ACEE',
+            'padding-bottom': '2px'
+        });
+        nextTwitterFlag = false;
+        showTwitter(url, keywords);
+    });
+    $(document).on('click', '.youtube', function() {
+
+        $('.liveContentMenu span').css({
+            'font-size': '20px',
+            'border-bottom': 'none',
+            'padding-bottom': '0px'
+        });
+        $('.youtube').css({
+            'font-size': '25px',
+            'border-bottom': '2px solid #e52d27',
+            'padding-bottom': '2px'
+        });
+        nextYoutubeFlag = false;
+        showYoutube(keywords);
+    });
+
+    $('.liveContent').css('display', 'block');
+
+
+    $(document).on('click', function(evt) { //対象以外を押した時にウィンドウを閉じる
+        if (!$(evt.target).closest('.liveList p,.liveContent').length) {
+            $('.liveContentMenu span').css({
+                'font-size': '20px',
+                'border-bottom': 'none',
+                'padding-bottom': '0px'
+            });
+            $('.twitter').css({
+                'font-size': '25px',
+                'border-bottom': '2px solid #55ACEE',
+                'padding-bottom': '2px'
+            });
+            $('.liveContent').css('display', 'none');
+            $(".liveText,.liveContent h3").empty();
+        }
+    });
+});
+
+
+
+
+//カレンダーのliveschedule
+
+var counts = [];
+
+
+//カレンダーの日付を選択した時にリストに予定一覧を出す
+$('.calendars').on('click', '.day', function() {
+
+    var clickDay = parseInt($(this).data("id"));
+    $('.listTitle').html((nowMonth + 1) + '月' + clickDay + '日')
+    $('.liveList').empty();
+
+    for (var i = 0; i < 12; i++) {
+        if (scheduleYear[0].month[i].text === (nowMonth + 1)) {
+            for (var x = 0; x < scheduleYear[0].month[i].day.length; x++) {
+                if (scheduleYear[0].month[i].day[x].text === clickDay) {
+                    for (var a = 0; a < scheduleYear[0].month[i].day[x].live.length; a++) {
+                        $('.liveList').append('<p>' + scheduleYear[0].month[i].day[x].live[a].schedule + '</p>');
+                    }
+
+                }
+
+            }
+        }
+    }
+})
+
+
+//カレンダーobjの作成
+var scheduleYear = [];
+var calendarQuery = '';
+
+function showCalendarSchedule() {
+    scheduleYear = [{
+        text: slideNowYear,
+        month: []
+    }];
+
+    for (var i = 1; i <= 12; i++) {
+
+        scheduleYear[0].month.push({
+            text: i,
+            day: []
+
+        })
+
+    }
+
+    var nowMonthh = 1;
+
+    for (var x = 0; x < 12; x++) {
+        var lastDay = new Date(2015, nowMonthh, 0).getDate();
+        for (var i = 1; i <= lastDay; i++) {
+            scheduleYear[0].month[x].day.push({
+                text: i,
+                live: []
+            })
+        }
+        nowMonthh += 1;
+    }
+
+
+    $.ajax({ //Googleカレンダーから予定を取得して入れる
+        url: 'https://www.googleapis.com/calendar/v3/calendars/' + id + '/events?q=' + calendarQuery + '&key=' + key,
+        dataType: 'jsonp'
+    }).done(function(body) {
+
+
+
+        for (var a = 0; a < body.items.length; a++) {
+
+            var bodyTime = new Date(body.items[a].start.dateTime);
+
+            if (scheduleYear[0].text === bodyTime.getFullYear()) {
+
+                for (var i = 0; i < scheduleYear[0].month.length; i++) {
+
+                    if (scheduleYear[0].month[i].text === (bodyTime.getMonth() + 1)) {
+
+                        for (var x = 0; x < scheduleYear[0].month[i].day.length; x++) {
+
+                            if (scheduleYear[0].month[i].day[x].text === bodyTime.getDate()) {
+
+                                scheduleYear[0].month[i].day[x].live.push({
+                                    schedule: body.items[a].summary
+                                })
+
+                            }
+
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+        }
+        for (var a = 0; a < scheduleYear[0].month[nowMonth].day[0].live.length; a++) {
+            $('.liveList').append('<p>' + scheduleYear[0].month[nowMonth].day[0].live[a].schedule + '</p>');
+        }
+
+        showCalendarCount('#table1', nowMonth1);
+        showCalendarCount('#table2', nowMonth2);
+    }).fail(function(body) {
+        console.log('失敗しました。');
+    })
+
+}
+
+
+
+
+showCalendarSchedule(); //カレンダーobj作成の実行
+
+
+//日付に何件のscheduleがあるかカウント
+var searchBtnFlag = false;
+
+function showCalendarCount(table, month) {
+    $(table + ' .liveCount').empty();
+    for (var i = 0; i < 12; i++) {
+        if (slideNowYear === scheduleYear[0].text && scheduleYear[0].month[i].text === (nowMonth + 1)) {
+
+            for (var x = 0; x < scheduleYear[0].month[i].day.length; x++) {
+                if (scheduleYear[0].month[i].day[x].live.length > 0) {
+
+                    $(table + ' .liveCount').eq(x).append(scheduleYear[0].month[i].day[x].live.length + '件');
+                }
+
+            }
+        }
+    }
+    searchBtnFlag = false;
+}
+
+
+
+
+//検索ボタンを押した時の動作
+$('button').click(function() {
+    if (searchBtnFlag) return;
+    searchBtnFlag = true;
+    scheduleYear = [{
+        text: 2015,
+        month: []
+    }];
+
+    calendarQuery = $('#input').val();
+    $('.liveCount').empty();
+    $('.liveList').empty();
+    showCalendarSchedule();
+})
+
+//Aboutを押した時の動作
+$('#about').click(function() {
+
+    $('#Icon').addClass('aboutIcon');
+    $('#Icon2').addClass('aboutIcon2');
+
+
+    $(document).on('click', function(evt) { //対象以外を押した時にAboutを削除する
+        if (!$(evt.target).closest('#about').length) {
+            $('#Icon').removeClass('aboutIcon');
+            $('#Icon2').removeClass('aboutIcon2');
+        }
+
+    })
+})
+</script>
+</body>
+</html>
