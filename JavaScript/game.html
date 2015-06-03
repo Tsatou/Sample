@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <script src="js/jquery-2.1.3.min.js"></script>
+<title>まるばつゲームサンプル</title>
+<style>
+h1{
+	font-size:20px;
+	margin:0;
+}
+#level{
+	margin: 0;
+}
+ul{
+	margin:0;
+	padding:0;
+}
+li{
+	float:left;
+	margin-left:2px;
+	display: block;
+}
+#map{
+	clear: both;
+}
+</style>
+</head>
+<body>
+	<h1>まるばつゲーム</h1>
+	<p id="level">対戦するコンピューターのレベル</p>
+	<ul>
+		<li>松</li>
+		<li>竹</li>
+		<li>梅</li>
+	</ul>
+	<div id="map"></div>
+<script>
+var setX = 5;
+var setY = 5;
+
+var yResult = 0;
+var xResult = 0;
+
+var playerFlag = true;
+
+var succesLeft = 0;
+var succesRight = 0;
+
+
+$(function() {
+
+
+    for (var i = 0; i < setY; i++) {
+
+        for (var j = 0; j < setX; j++) {
+            $('#map').append('<span id="' + i + j + '">□</span>');
+            if (j === setX - 1) {
+                $('#map').append('<br>');
+            }
+        }
+    }
+
+
+
+    //Player関数
+    $('#map span').on('click', function() {
+        var id = $(this).attr("id");
+        if ($('#' + id).html() === '□' && playerFlag) {
+            playerFlag = false;
+            $('#' + id).html('●');
+            if (id < 10) {
+                xResult = parseInt(id);
+                hantei(0, xResult);
+            } else {
+                xResult = parseInt(id) % 10;
+                yResult = Math.floor(parseInt(id) / 10);
+                hantei(yResult, xResult, '●');
+            }
+
+            setTimeout('cpuNo1()', 2000);
+        }
+
+    })
+
+})
+
+//コンピューター関数
+function cpuNo1() {
+
+    for (var i = 0; i < 100; i++) {
+        yResult = Math.floor(Math.random() * setX);
+        xResult = Math.floor(Math.random() * setX);
+
+        if ($('#' + yResult + xResult).html() === '□') {
+            break;
+        }
+
+    }
+
+    $('#' + yResult + xResult).html('▲');
+    hantei(yResult, xResult, '▲');
+}
+
+
+
+
+function hantei(yResult, xResults, icon) {
+
+    //X軸判定
+    for (var i = 0; i < (setX - 1) - xResults; i++) {
+        if ($('#' + yResult + (xResults + i)).html() === icon && $('#' + yResult + (xResults + i + 1)).html()　 === icon) {
+            succesLeft += 1;
+            if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                console.log('clear');
+                succesLeft = 0;
+                succesRight = 0;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (xResults > 0) {
+        for (var i = 0; i < xResults; i++) {
+            if ($('#' + yResult + (xResults - i)).html() === icon && $('#' + yResult + (xResults - i - 1)).html()　 === icon) {
+                succesRight += 1;
+                if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                    console.log('clear');
+                    succesLeft = 0;
+                    succesRight = 0;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    succesLeft = 0;
+    succesRight = 0;
+
+
+
+    //Y軸判定
+    for (var i = 0; i < (setY - 1) - yResult; i++) {
+        if ($('#' + (yResult + i) + xResults).html() === icon && $('#' + (yResult + i + 1) + xResults).html()　 === icon) {
+            succesLeft += 1;
+            if (succesLeft === (setY - 1) - yResult && succesRight === yResult) {
+                console.log('clear');
+                succesLeft = 0;
+                succesRight = 0;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (yResult > 0) {
+
+        for (var i = 0; i < yResult; i++) {
+            if ($('#' + (yResult - i) + xResults).html() === icon && $('#' + (yResult - i - 1) + xResults).html()　 === icon) {
+                succesRight += 1;
+                if (succesLeft === (setY - 1) - yResult && succesRight === yResult) {
+                    console.log('clear');
+                    succesLeft = 0;
+                    succesRight = 0;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    succesLeft = 0;
+    succesRight = 0;
+
+
+
+
+    //斜め判定(左上より)
+    for (var i = 0; i < (setX - 1) - xResults; i++) {
+        if ($('#' + (yResult + i) + (xResults + i)).html() === icon && $('#' + (yResult + i + 1) + (xResults + i + 1)).html()　 === icon) {
+            succesLeft += 1;
+            if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                console.log('clear');
+                succesLeft = 0;
+                succesRight = 0;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (xResults > 0) {
+        for (var i = 0; i < xResults; i++) {
+            if ($('#' + (yResult - i) + (xResults - i)).html() === icon && $('#' + (yResult - i - 1) + (xResults - i - 1)).html()　 === icon) {
+                succesRight += 1;
+                if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                    console.log('clear');
+                    succesLeft = 0;
+                    succesRight = 0;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    succesLeft = 0;
+    succesRight = 0;
+
+
+    //斜め判定(左下より)
+    for (var i = 0; i < (setX - 1) - xResults; i++) {
+        if ($('#' + (yResult - i) + (xResults + i)).html() === icon && $('#' + (yResult - i - 1) + (xResults + i + 1)).html()　 === icon) {
+            succesLeft += 1;
+            if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                console.log('clear');
+                succesLeft = 0;
+                succesRight = 0;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (xResults > 0) {
+        for (var i = 0; i < xResults; i++) {
+            if ($('#' + (yResult + i) + (xResults - i)).html() === icon && $('#' + (yResult + i + 1) + (xResults - i - 1)).html()　 === icon) {
+                succesRight += 1;
+                if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
+                    console.log('clear');
+                    succesLeft = 0;
+                    succesRight = 0;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    succesLeft = 0;
+    succesRight = 0;
+
+    if (icon === '▲') {
+        playerFlag = true;
+    }
+
+
+
+}
+</script>
+</body>
+</html>
