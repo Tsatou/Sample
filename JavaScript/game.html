@@ -30,11 +30,12 @@ li{
 	<h1>まるばつゲーム</h1>
 	<p id="level">対戦するコンピューターのレベル</p>
 	<ul>
-		<li>松</li>
-		<li>竹</li>
-		<li>梅</li>
+		<li id="show">松</li>
+		<li id="chiku">竹</li>
+		<li id="bai">梅</li>
 	</ul>
 	<div id="map"></div>
+    <div id="result"></div>
 <script>
 var setX = 5;
 var setY = 5;
@@ -42,10 +43,16 @@ var setY = 5;
 var yResult = 0;
 var xResult = 0;
 
-var playerFlag = true;
+var playerFlag = false;
+var cpuFlag = false;
+var endFlag = false;
 
 var succesLeft = 0;
 var succesRight = 0;
+
+var cpuSelect = false;
+var cpuLevel = "";
+
 
 
 $(function() {
@@ -62,6 +69,14 @@ $(function() {
     }
 
 
+    $('li').on('click', function() {
+        if (cpuSelect) return;
+        cpuSelect = true;
+        cpuLevel = $(this).attr('id');
+        playerFlag = true;
+    })
+
+
 
     //Player関数
     $('#map span').on('click', function() {
@@ -71,14 +86,20 @@ $(function() {
             $('#' + id).html('●');
             if (id < 10) {
                 xResult = parseInt(id);
-                hantei(0, xResult);
+                hantei(0, xResult, '●');
             } else {
                 xResult = parseInt(id) % 10;
                 yResult = Math.floor(parseInt(id) / 10);
                 hantei(yResult, xResult, '●');
             }
-
-            setTimeout('cpuNo1()', 2000);
+            console.log(cpuLevel)
+            if (cpuLevel === 'show') {
+                setTimeout('show()', 1000);
+            } else if (cpuLevel === 'chiku') {
+                setTimeout('chiku()', 1000);
+            } else {
+                setTimeout('bai()', 1000);
+            }
         }
 
     })
@@ -86,8 +107,9 @@ $(function() {
 })
 
 //コンピューター関数
-function cpuNo1() {
-
+function show() {
+    if (cpuFlag) return;
+    cpuflag = true;
     for (var i = 0; i < 100; i++) {
         yResult = Math.floor(Math.random() * setX);
         xResult = Math.floor(Math.random() * setX);
@@ -102,6 +124,13 @@ function cpuNo1() {
     hantei(yResult, xResult, '▲');
 }
 
+function chiku() {
+
+}
+
+function bai() {
+
+}
 
 
 
@@ -109,12 +138,13 @@ function hantei(yResult, xResults, icon) {
 
     //X軸判定
     for (var i = 0; i < (setX - 1) - xResults; i++) {
+
         if ($('#' + yResult + (xResults + i)).html() === icon && $('#' + yResult + (xResults + i + 1)).html()　 === icon) {
             succesLeft += 1;
+
             if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                console.log('clear');
-                succesLeft = 0;
-                succesRight = 0;
+                showClear(icon);
+
             }
         } else {
             break;
@@ -126,9 +156,7 @@ function hantei(yResult, xResults, icon) {
             if ($('#' + yResult + (xResults - i)).html() === icon && $('#' + yResult + (xResults - i - 1)).html()　 === icon) {
                 succesRight += 1;
                 if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                    console.log('clear');
-                    succesLeft = 0;
-                    succesRight = 0;
+                    showClear(icon);
                 }
             } else {
                 break;
@@ -145,9 +173,7 @@ function hantei(yResult, xResults, icon) {
         if ($('#' + (yResult + i) + xResults).html() === icon && $('#' + (yResult + i + 1) + xResults).html()　 === icon) {
             succesLeft += 1;
             if (succesLeft === (setY - 1) - yResult && succesRight === yResult) {
-                console.log('clear');
-                succesLeft = 0;
-                succesRight = 0;
+                showClear(icon);
             }
         } else {
             break;
@@ -160,9 +186,7 @@ function hantei(yResult, xResults, icon) {
             if ($('#' + (yResult - i) + xResults).html() === icon && $('#' + (yResult - i - 1) + xResults).html()　 === icon) {
                 succesRight += 1;
                 if (succesLeft === (setY - 1) - yResult && succesRight === yResult) {
-                    console.log('clear');
-                    succesLeft = 0;
-                    succesRight = 0;
+                    showClear(icon);
                 }
             } else {
                 break;
@@ -181,9 +205,7 @@ function hantei(yResult, xResults, icon) {
         if ($('#' + (yResult + i) + (xResults + i)).html() === icon && $('#' + (yResult + i + 1) + (xResults + i + 1)).html()　 === icon) {
             succesLeft += 1;
             if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                console.log('clear');
-                succesLeft = 0;
-                succesRight = 0;
+                showClear(icon);
             }
         } else {
             break;
@@ -195,9 +217,7 @@ function hantei(yResult, xResults, icon) {
             if ($('#' + (yResult - i) + (xResults - i)).html() === icon && $('#' + (yResult - i - 1) + (xResults - i - 1)).html()　 === icon) {
                 succesRight += 1;
                 if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                    console.log('clear');
-                    succesLeft = 0;
-                    succesRight = 0;
+                    showClear(icon);
                 }
             } else {
                 break;
@@ -213,9 +233,7 @@ function hantei(yResult, xResults, icon) {
         if ($('#' + (yResult - i) + (xResults + i)).html() === icon && $('#' + (yResult - i - 1) + (xResults + i + 1)).html()　 === icon) {
             succesLeft += 1;
             if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                console.log('clear');
-                succesLeft = 0;
-                succesRight = 0;
+                showClear(icon);
             }
         } else {
             break;
@@ -227,9 +245,8 @@ function hantei(yResult, xResults, icon) {
             if ($('#' + (yResult + i) + (xResults - i)).html() === icon && $('#' + (yResult + i + 1) + (xResults - i - 1)).html()　 === icon) {
                 succesRight += 1;
                 if (succesLeft === (setX - 1) - xResults && succesRight === xResults) {
-                    console.log('clear');
-                    succesLeft = 0;
-                    succesRight = 0;
+                    showClear(icon);
+
                 }
             } else {
                 break;
@@ -239,11 +256,23 @@ function hantei(yResult, xResults, icon) {
     succesLeft = 0;
     succesRight = 0;
 
-    if (icon === '▲') {
+    if (icon === '▲' && endFlag === false) {
         playerFlag = true;
     }
 
+}
 
+function showClear(icon) {
+    succesLeft = 0;
+    succesRight = 0;
+    endFlag = true;
+    playerFlag = false;
+    cpuFlag = true;
+    if (icon === '▲') {
+        $('#result').html('コンピューターの勝ち');
+        return;
+    }
+    $('#result').html('Playerの勝ち');
 
 }
 </script>
